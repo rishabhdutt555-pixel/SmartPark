@@ -1,0 +1,160 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #e4e5e8;
+    color: #17243b;
+    font: 16px system-ui, sans-serif;
+}
+
+nav {
+    background: #17243b;
+    padding: 18px 22px;
+    color: white;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav .brand {
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: auto;
+}
+
+main {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 18px;
+    min-height: 65vh;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px #00000008;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.free {
+    border-top: 5px solid #29a36b;
+}
+
+.busy {
+    border-top: 5px solid #df6464;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bec9db;
+    border-radius: 7px;
+    margin: 6px 0 15px;
+    font: inherit;
+}
+
+button {
+    background: #16607b;
+    color: white;
+    padding: 10px 15px;
+    border: 0;
+    border-radius: 7px;
+    cursor: pointer;
+    font: inherit;
+}
+
+button:hover {
+    filter: brightness(0.94);
+}
+
+label {
+    display: block;
+    font-weight: 600;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.scroll {
+    overflow-x: auto;
+}
+
+.notice {
+    background: #fff0be;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+}
+
+.inline {
+    display: inline-block;
+    margin: 2px;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+.muted {
+    color: #66758b;
+}
+
+pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    background: #17243b;
+    color: #e5f0ff;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #66758b;
+}
+
+@media (max-width: 600px) {
+    nav {
+        gap: 12px;
+    }
+
+    nav .brand {
+        width: 100%;
+    }
+
+    main {
+        margin-top: 18px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+}
+
+.timeline { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 20px; }
+.timeline-item { display: inline-flex; flex-direction: column; gap: 4px; padding: 10px 14px; border: 1px solid #9fb5d7; border-radius: 7px; background: #eaf1ff; font-weight: 700; min-width: 70px; text-align: center; }
+.timeline-item small { font-weight: 400; }
