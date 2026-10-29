@@ -1,6 +1,7 @@
 __pycache__/
 *.py[cod]
 *.db
+!parking.db
 *.db-journal
 .env
 .env.*
