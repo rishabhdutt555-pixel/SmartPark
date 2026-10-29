@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Admin | Smart Park{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>Admin dashboard</h1>
+    <form method="post">
+        <label for="label">New space name</label>
+        <input id="label" name="label" placeholder="P-13" required>
+        <label for="rate">Hourly rate (INR)</label>
+        <input id="rate" name="rate" type="number" min="1" value="40" required>
+        <button type="submit">Add space</button>
+    </form>
+</div>
+<div class="card scroll">
+    <h2>All bookings</h2>
+    <table>
+        <thead><tr><th>ID</th><th>User</th><th>Vehicle</th><th>Space</th><th>Status</th><th>Estimated cost</th></tr></thead>
+        <tbody>
+        {% for booking in rows %}
+            <tr>
+                <td>{{ booking.id }}</td><td>{{ booking.name }}</td><td>{{ booking.plate }}</td>
+                <td>{{ booking.label }}</td><td>{{ booking.status }}</td><td>{{ booking.amount }}</td>
+            </tr>
+        {% else %}
+            <tr><td colspan="6">No bookings yet.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

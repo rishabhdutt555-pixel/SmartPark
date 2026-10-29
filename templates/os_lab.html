@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}OS Part | Smart Park{% endblock %}
+{% block content %}
+<h1>OS Part</h1>
+<div class="card">
+    <h2>1. CPU Scheduling Simulator</h2>
+    <p>Enter CPU burst times for processes in arrival order. The simulator calculates completion, turnaround, and waiting times.</p>
+    <form method="post">
+        <input type="hidden" name="task" value="cpu">
+        <label for="bursts">CPU burst times (comma-separated, 1–8 processes)</label>
+        <input id="bursts" name="bursts" value="{{ burst_input }}" required>
+        <label for="algorithm">Scheduling algorithm</label>
+        <select id="algorithm" name="algorithm">
+            <option value="fcfs" {{ 'selected' if selected_algorithm == 'fcfs' else '' }}>FCFS — First Come, First Served</option>
+            <option value="sjf" {{ 'selected' if selected_algorithm == 'sjf' else '' }}>SJF — Shortest Job First</option>
+            <option value="rr" {{ 'selected' if selected_algorithm == 'rr' else '' }}>Round Robin</option>
+        </select>
+        <label for="quantum">Round Robin time quantum (1–10)</label>
+        <input id="quantum" name="quantum" type="number" min="1" max="10" value="{{ quantum }}">
+        <button type="submit">Run CPU scheduling</button>
+    </form>
+    {% if schedule %}
+    <h3>Execution timeline (Gantt-style)</h3>
+    <div class="timeline">{% for item in schedule[0] %}<span class="timeline-item">{{ item.pid }}<small>{{ item.start }}–{{ item.end }}</small></span>{% endfor %}</div>
+    <div class="scroll"><table><thead><tr><th>Process</th><th>CPU Burst (BT)</th><th>Completion Time (CT)</th><th>Turnaround Time (TAT)</th><th>Waiting Time (WT)</th></tr></thead><tbody>
+    {% for row in schedule[1] %}<tr><td>{{ row.pid }}</td><td>{{ row.burst }}</td><td>{{ row.completion }}</td><td>{{ row.turnaround }}</td><td>{{ row.waiting }}</td></tr>{% endfor %}
+    </tbody></table></div>
+    <p><strong>Average WT:</strong> {{ schedule[2] }} time units · <strong>Average TAT:</strong> {{ schedule[3] }} time units</p>
+    {% endif %}
+</div>
+<div class="card">
+    <h2>2. Thread Synchronization & Resource Allocation</h2>
+    <p>Multiple worker threads compete for one simulated parking space at the same time. A mutex protects the critical section so only one thread can allocate the resource.</p>
+    <form method="post">
+        <input type="hidden" name="task" value="resource">
+        <label for="count">Number of requests (2–20)</label>
+        <input id="count" name="count" type="number" min="2" max="20" value="5">
+        <button type="submit">Run resource simulation</button>
+    </form>
+    {% if events %}<pre>{% for event in events %}{{ event }}
+{% endfor %}</pre>{% endif %}
+</div>
+{% endblock %}

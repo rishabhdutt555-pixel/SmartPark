@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Smart Park{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <a class="brand" href="/">Smart Park</a>
+        {% if session.get('uid') %}
+            <a href="/">Parking</a>
+            <a href="/vehicles">Vehicles</a>
+            <a href="/bookings">Bookings</a>
+            <a href="/os">OS Part</a>
+            {% if session.get('role') == 'admin' %}
+                <a href="/admin">Admin</a>
+            {% endif %}
+            <form method="post" action="/logout" class="logout-form">
+                <button type="submit">Logout</button>
+            </form>
+        {% else %}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        {% endif %}
+    </nav>
+
+    <main>
+        {% for message in get_flashed_messages() %}
+            <div class="notice">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

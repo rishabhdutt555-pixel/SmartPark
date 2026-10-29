@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Parking | Smart Park{% endblock %}
+{% block content %}
+<h1>Hello, {{ session.get('name') }}</h1>
+<p class="muted">{{ free }} / {{ spaces|length }} spaces available. Active bookings reserve a space until they are cancelled.</p>
+<div class="grid">
+    {% for space in spaces %}
+    <div class="card {{ 'busy' if space.busy else 'free' }}">
+        <h2>{{ space.label }}</h2>
+        <p>{{ 'Occupied' if space.busy else 'Available' }} · INR {{ space.rate }}/hour</p>
+        {% if not space.busy and vehicles %}
+        <form action="/book" method="post">
+            <input type="hidden" name="sid" value="{{ space.id }}">
+            <label for="vehicle-{{ space.id }}">Vehicle</label>
+            <select id="vehicle-{{ space.id }}" name="vid">
+                {% for vehicle in vehicles %}
+                <option value="{{ vehicle.id }}">{{ vehicle.plate }}</option>
+                {% endfor %}
+            </select>
+            <label for="hours-{{ space.id }}">Hours</label>
+            <input id="hours-{{ space.id }}" type="number" name="hours" value="1" min="1" max="24" required>
+            <button type="submit">Book</button>
+        </form>
+        {% elif not vehicles %}
+        <a href="/vehicles">Add a vehicle first</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

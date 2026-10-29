@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Login | Smart Park{% endblock %}
+{% block content %}
+<div class="card form-card">
+    <h1>Welcome to Smart Park</h1>
+    <p>Book parking in a few simple steps.</p>
+    <form method="post">
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" required>
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+    <p>New user? <a href="/register">Register here</a>.</p>
+</div>
+{% endblock %}

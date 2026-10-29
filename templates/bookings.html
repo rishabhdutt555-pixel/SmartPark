@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}My Bookings | Smart Park{% endblock %}
+{% block content %}
+<div class="card scroll">
+    <h1>My bookings</h1>
+    <p>View your parking reservations here. Cancel an active booking if you no longer need it.</p>
+    <table>
+        <thead><tr><th>ID / date</th><th>Vehicle / space</th><th>Duration</th><th>Estimated cost</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+        {% for booking in rows %}
+            <tr>
+                <td>{{ booking.id }}<br>{{ booking.created }}</td>
+                <td>{{ booking.plate }} / {{ booking.label }}</td>
+                <td>{{ booking.hours }} hour(s)</td>
+                <td>INR {{ booking.amount }}</td>
+                <td>{{ booking.status }}</td>
+                <td>{% if booking.status == 'active' %}<form class="inline" method="post" action="/booking/{{ booking.id }}/cancel"><button type="submit">Cancel booking</button></form>{% else %}—{% endif %}</td>
+            </tr>
+        {% else %}<tr><td colspan="6">No bookings yet.</td></tr>{% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
