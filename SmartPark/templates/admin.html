@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Admin | Smart Park{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>Admin dashboard</h1>
+    <form method="post">
+        <label for="label">New space name</label>
+        <input id="label" name="label" placeholder="P-13" required>
+        <label for="area">Area / floor</label>
+        <input id="area" name="area" placeholder="Ground Floor" required>
+        <label for="rate">Hourly rate (INR)</label>
+        <input id="rate" name="rate" type="number" min="1" value="40" required>
+        <button type="submit">Add space</button>
+    </form>
+</div>
+<div class="card scroll">
+    <h2>Manage parking spaces</h2>
+    <table><thead><tr><th>Space</th><th>Area</th><th>Current status</th><th>Update status</th></tr></thead><tbody>
+    {% for space in spaces %}<tr><td>{{ space.label }}</td><td>{{ space.area }}</td><td>{{ space.status|title }}</td><td><form method="post" action="/admin/space/{{ space.id }}/status" class="inline"><select name="status"><option value="available" {% if space.status == 'available' %}selected{% endif %}>Available</option><option value="maintenance" {% if space.status == 'maintenance' %}selected{% endif %}>Maintenance</option></select><button type="submit">Update</button></form></td></tr>{% endfor %}
+    </tbody></table>
+</div>
+<div class="card scroll">
+    <h2>All bookings</h2>
+    <table>
+        <thead><tr><th>ID</th><th>User</th><th>Vehicle</th><th>Space</th><th>Status</th><th>Type</th><th>Payment</th><th>Estimated cost</th></tr></thead>
+        <tbody>
+        {% for booking in rows %}
+            <tr>
+                <td>{{ booking.id }}</td><td>{{ booking.name }}</td><td>{{ booking.plate }}</td>
+                <td>{{ booking.label }}</td><td>{{ booking.status }}</td><td>{{ booking.booking_type }}</td><td>{{ booking.payment_status }}</td><td>{{ booking.amount }}</td>
+            </tr>
+        {% else %}
+            <tr><td colspan="8">No bookings yet.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

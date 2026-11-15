@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}My Vehicles | Smart Park{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>My vehicles</h1>
+    <form method="post">
+        <label for="plate">Registration number</label>
+        <input id="plate" name="plate" placeholder="UK07AB1234" maxlength="20" required>
+        <button type="submit">Add vehicle</button>
+    </form>
+    <ul>
+        {% for vehicle in rows %}
+        <li>{{ vehicle.plate }}</li>
+        {% else %}
+        <li>No vehicles yet.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
