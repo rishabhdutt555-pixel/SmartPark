@@ -1,4 +1,4 @@
-# SmartPark with Deadlock Detection
+# SmartPark 
 
 A Flask and SQLite parking management project with an operating systems lab.
 
